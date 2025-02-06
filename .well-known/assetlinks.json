@@ -1,0 +1,9 @@
+[{
+  "relation": ["delegate_permission/common.handle_all_urls"],
+  "target": {
+    "namespace": "android_app",
+    "package_name": "com.ex3.tbps.free",
+    "sha256_cert_fingerprints":
+    ["15:AD:B9:72:E0:A0:4B:FF:C3:ED:11:03:49:BF:78:F1:39:BF:3C:7E:19:ED:44:D7:88:0F:6F:A8:C7:AA:15:8A"]
+  }
+}]

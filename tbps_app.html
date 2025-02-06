@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>TBPS Redirect</title>
+</head>
+<body>
+    <div style="
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        min-height: 100vh;
+        max-width: 100%;
+        width: 100%;
+        margin: 0 auto;
+        padding: 20px 15px;
+        font-family: Arial, sans-serif;
+    ">
+        <h2 style="font-size: 1.8rem; text-align: center; margin: 0 0 15px 0;">Opening TBPS...</h2>
+        <div id="wechat-tip" style="display: none; margin: 20px; padding: 15px; background-color: #f8f8f8; border-radius: 8px; font-size: 1rem; width: 90%;">
+            <p style="font-size: 1rem; color: #666;">在微信中打开时，请点击右上角"..."，选择"在浏览器中打开"</p>
+            <!-- <img src="wechat-open-browser.png" alt="微信打开示意图" style="max-width: 200px; margin-top: 10px;"> -->
+        </div>
+        <div id="ios-tip" style="display: none; margin: 20px; padding: 15px; background-color: #f8f8f8; border-radius: 8px;">
+            <p style="color: #666;">iOS 用户请点击这里打开应用：</p>
+            <a id="ios-deep-link" href="#" style="color: #007AFF; text-decoration: underline;">打开 TBPS 应用</a>
+        </div>
+        <p style="font-size: 1rem;">If TBPS does not open automatically, <a id="manual-link" href="#">please click here</a></p>
+        <p>You need TBPS App installed on your device to open the link.</p>
+        <p>If it is not installed, please download it from the links below:</p>
+        <table style="
+            width: calc(100% - 30px);
+            margin: 10px 10px;
+            border-collapse: collapse;
+            border: 2px solid #808080;
+
+        ">
+            <tr>
+                <th style="color: black; padding: 10px; border: 1px solid #d0d0d0; background-color: #f0f0f0;">App Store</th>
+                <th style="color: black; padding: 10px; border: 1px solid #d0d0d0; background-color: #f0f0f0;">Google Play</th>
+            </tr>
+            <tr>
+                <td style="padding: 10px; border: 1px solid #d0d0d0;"><a href="https://apps.apple.com/nz/app/tbps-free/id6739697481">Lite (Free with ads)</a></td>
+                <td style="padding: 10px; border: 1px solid #d0d0d0;"><a href="https://play.google.com/store/apps/details?id=com.ex3.tbps.free">Lite (Free with ads)</a></td>
+            </tr>
+            <tr>
+                <td style="padding: 10px; border: 1px solid #d0d0d0;"><a href="https://apps.apple.com/nz/app/tbps-premium/id6739725463">Premium</a></td>
+                <td style="padding: 10px; border: 1px solid #d0d0d0;"><a href="https://play.google.com/store/apps/details?id=com.ex3.tbps.premium">Premium</a></td>
+            </tr>
+        </table>
+
+        <!-- <p>或者</p> -->
+        <!-- <p><a id="intent-link" href="#">使用 Android Intent 打开</a></p> -->
+    </div>
+
+    <script>
+        (function() {
+            var urlParams = new URLSearchParams(window.location.search);
+            var data = urlParams.get('data');
+            
+            // 设备检测
+            var isWechat = /MicroMessenger/i.test(navigator.userAgent);
+            var isAndroid = /Android/i.test(navigator.userAgent);
+            var isIOS = /iPhone|iPad|iPod/i.test(navigator.userAgent);
+            
+            // 构建 URL
+            var tbpsUrl = 'tbps://simulation' + (data ? '?data=' + data : '');
+            var appStoreUrl = 'https://apps.apple.com/nz/app/tbps-free/id6739697481';
+            
+            // iOS 专用处理
+            if (isIOS && !isWechat) {
+                // 显示 iOS 专用提示
+                document.getElementById('ios-tip').style.display = 'block';
+                
+                // 创建隐藏的 iframe 用于触发 Deep Link
+                var iframe = document.createElement('iframe');
+                iframe.style.display = 'none';
+                iframe.src = tbpsUrl;
+                document.body.appendChild(iframe);
+
+                // 设置超时回退到 App Store
+                setTimeout(function() {
+                    if (!document.hidden) {
+                        window.location.href = appStoreUrl;
+                    }
+                }, 500);
+            }
+            // 其他处理逻辑保持不变...
+
+            // 更新手动链接
+            var manualLink = document.getElementById('manual-link');
+            
+            if (isWechat) {
+                // 显示微信提示
+                document.getElementById('wechat-tip').style.display = 'block';
+                // 在微信中使用应用商店链接
+                manualLink.href = isAndroid ? 'https://play.google.com/store/apps/details?id=com.ex3.tbps.free' : 'https://apps.apple.com/nz/app/tbps-free/id6739697481';
+            } else {
+                manualLink.href = tbpsUrl;
+                // 非微信环境下尝试打开应用
+                window.location.href = tbpsUrl;
+            }
+        })();
+    </script>
+
+    <style>
+        @media (max-width: 480px) {
+            h2 {
+                font-size: 1.5rem !important;
+            }
+            p, a {
+                font-size: 0.9rem !important;
+            }
+            th, td {
+                padding: 10px !important;
+            }
+        }
+    </style>
+</body>
+</html> 

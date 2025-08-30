@@ -117,7 +117,7 @@ Through experimentation, I discovered operational precision limits:
 
 | Operation Type | Experimental Range | Practical Precision | Controllable Values |
 |---------------|------------------|-------------------|-------------------|
-| Rotation | ~150° | 0.5° minimum interval | 200-300 values |
+| Rotation | ~100° | 1° minimum interval | ~100 values |
 | Scaling | 400-500 pixels | Several pixels | Tens of values |
 | Translation | Screen dimensions | Several pixels | Tens of values |
 

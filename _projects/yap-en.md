@@ -13,19 +13,11 @@ YAP (Yet Another Player) redefines mobile media playback with its innovative vir
 ## Key Features
 
 ### 🎛️ Virtual Knob Gesture Technology
-- **Natural Control**: Multi-finger rotation gestures that feel like physical knobs
-- **Precision**: Fine-grained control over playback speed and position
-- **Efficiency**: Faster and more accurate than traditional sliders
+- **Natural Control**: Multi-finger rotation gestures that mimic physical knobs
+- **Speed and Precision**: Make quick, sweeping changes or fine, precise adjustments across a wide range
 
 ### 📱 Platform Support
-- **iOS**: Native iOS implementation with optimized touch response
-- **Android**: Full Android support with gesture recognition
-- **Cross-platform**: Consistent experience across devices
-
-### 🎥 Media Capabilities
-- **Multiple Formats**: Support for various video and audio formats
-- **High Quality**: Optimized playback performance
-- **Responsive**: Smooth operation even on lower-end devices
+YAP supports both iOS and Android platforms, providing a seamless user experience across devices.
 
 ## Demo Videos
 
@@ -49,23 +41,16 @@ Join our community for discussions, feedback, and support:
 - **[Reddit](https://www.reddit.com/r/YetAnotherPlayer)** - Discussions and feedback
 
 ## Technical Innovation
+YAP is powered by my patent-pending invention: the virtual knob technology. Learn more about it in my blog post:
+- [English]({% post_url 2025-08-28-virtual-knobs %})
+- [中文]({% post_url 2025-08-28-虚拟旋钮 %})
 
-YAP represents a breakthrough in mobile interaction design, implementing the virtual knob system that was originally conceived for automotive environments. The technology addresses the limitations of traditional touch interfaces by:
 
-1. **Reducing Visual Dependency**: Users can control playback without precise targeting
-2. **Improving Precision**: Multi-dimensional control through rotation, scaling, and positioning
-3. **Enhancing Speed**: Faster value adjustment compared to sliders or steppers
-4. **Increasing Reliability**: Natural resistance to interference and accidental touches
-
-## Future Development
-
-The virtual knob technology implemented in YAP serves as a foundation for broader human-machine interaction applications, with potential expansions into:
-
-- Automotive interfaces
-- VR/AR environments  
-- Desktop applications
-- Smart home controls
+## Areas of Application
+- Mobile Devices
+- Desktop Devices
+- In-Vehicle Systems
+- VR/AR Devices
+- Smart Home
 
 ---
-
-*YAP showcases how innovative interaction design can transform everyday experiences, making technology more intuitive and efficient.*

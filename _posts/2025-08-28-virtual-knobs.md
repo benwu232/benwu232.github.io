@@ -63,7 +63,8 @@ The analysis reveals a clear pattern: automotive environments require safe, simp
 
 ---
 
-## Initial Design: Building the Foundation
+## Initial Design: Mimicing Physical Knobs
+
 
 ### Mathematical Model
 
@@ -109,7 +110,7 @@ I spent about two weeks completing the virtual knob prototype on an Android devi
 
 ---
 
-## Beyond Physical Knobs: Multi-Dimensional Controls
+## Further design: Beyond Physical Knobs
 
 After completing the initial design, I explored additional possibilities. The prototype worked excellently but only used rotation angle for adjusting. According to the mathematical model, Virtual knobs still have two parameters c and r not used  — could these be utilized too?
 

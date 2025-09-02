@@ -24,15 +24,15 @@ After diving deep into research, I discovered that touchscreens and physical kno
 Modern mobile devices predominantly use touchscreen + GUI designs with these characteristics:
 
 **Strengths:**
-- **Intuitive interaction**: Direct manipulation of on-screen elements feels natural
-- **Versatile applications**: Highly flexible design adapts to diverse use cases
-- **Rich functionality**: Supports complex interactions and workflows
+- **Intuitive interaction**: Direct manipulation of on-screen elements feels natural.
+- **Versatile applications**: Highly flexible design adapts to diverse use cases.
+- **Rich functionality**: Supports complex interactions and workflows.
 
 **Limitations:**
-- **Visual dependency**: The "locate-then-operate" model consumes significant visual attention (think multi-level menu navigation)
-- **High cognitive load**: Same functions often require different interaction patterns across apps
-- **Lack of tactile feedback**: Missing the physical sensations users expect
-- **Poor interference resistance**: Designed for stable desktop/mobile environments without considering vibration or movement
+- **Visual dependency**: The "locate-then-operate" model consumes significant visual attention (think multi-level menu navigation).
+- **High cognitive load**: Same functions often require different interaction patterns across apps.
+- **Lack of tactile feedback**: Missing the physical sensations users expect.
+- **Poor interference resistance**: Designed for stable desktop/mobile environments without considering vibration or movement.
 
 ### Physical Knobs: The Analog Advantage
 
@@ -88,21 +88,21 @@ Where:
 **Touchscreen Implementation Algorithm**:
 1. Calculate distances between all touch points, select the two points p₁(x₁, y₁) and p₂(x₂, y₂) with maximum distance as the primary vector (reduces noise impact)
 2. Knob center: c = ((x₁+x₂)/2, (y₁+y₂)/2)
-3. Knob radius: r = |p₁p₂|/2
+3. Knob radius: r = \|p₁p₂\|/2
 4. Rotation angle: Calculate Δθ through primary vector angle changes
 
-### Reimagining UI Design
+### Reimagining interaction Design
 Traditional UI follows a vision-based "locate-then-operate" paradigm. UI elements occupy certain screen positions, requiring users to visually locate target elements (buttons, menus) before interacting with them (clicking, dragging). While this approach offers intuitive interaction and versatile application scenarios, it also introduces high cognitive load and heavy visual dependency. This design model originated for and remains suitable for desktop and mobile environments — but becomes a serious liability when applied to automotive interfaces.
 
 ### Virtual Knob UI Design Principles
 
 To minimize visual dependency and ensure driving safety, I adopted these design principles:
 
-1. **No fixed positions**: Virtual knobs don't have fixed positions
-2. **Large operation zones**: Designate sufficiently large areas (accounting for vibration tolerance) where any rotation gesture is interpreted as knob operation
-3. **Context-aware activation**: Define activation actions (voice wake-up, specific swipe patterns) to activate operation zones. These floating windows auto-dismiss when not needed
-4. **Multi-knob system**: Different activation actions enable different virtual knobs without additional hardware costs. Say "adjust volume" → volume control zone appears; say "adjust seat" → seat control zone appears. Different zones should be clearly distinguishable (different backgrounds or vibration patterns)
-5. **Tactile enhancement**: Screen vibration and other haptic feedback technologies increase virtual knob realism and intuitiveness
+1. **No fixed positions**: Virtual knobs have no fixed position but follow the finger's position, which can reduce visual attention needed for positioning.
+2. **Large distinguishable operation areas**: Designate a sufficiently large operation area on the screen (large enough for rotation operations and with redundant space for disturbances like bumps). Any rotation gesture within this operation area is interpreted as knob rotation. The operation area can be distinguished through visual, auditory, and tactile aspects. For example, the operation area uses prominent colors or patterns as background; it emits alert sounds when fingers touch the operation area; it provides continuous vibration feedback during operation within the area, and the vibration stops when fingers move out of the operation area.
+3. **Context-aware activation**: Define activation actions (voice wake-up, specific swipe patterns) to activate operation zones. These floating windows auto-dismiss when not needed.
+4. **Multi-knob system**: Different activation actions enable different virtual knobs without additional hardware costs. Say "adjust volume" → volume control zone appears; say "adjust seat" → seat control zone appears. Different zones should be clearly distinguishable (different backgrounds, different alert sounds, or different vibration patterns).
+5. **Tactile enhancement**: Screen vibration and other haptic feedback technologies increase virtual knob realism and intuitiveness.
 
 ### Prototype Results
 
@@ -120,13 +120,13 @@ Through experimentation, I discovered operational precision limits:
 |---------------|------------------|-------------------|-------------------|
 | Rotation | ~100° | 1° minimum interval | ~100 values |
 | Scaling | 400-500 pixels | Several pixels | Tens of values |
-| Translation | Screen dimensions | Several pixels | Tens of values |
+| Translation | 400-800 pixels | Several pixels | Tens of values |
 
 This approach works well for common applications but falls short in high-precision or wide-range scenarios. Consider timer settings: even when limited to a single day, we have 24×60×60=86,400 seconds. Since single operations can only handle tens to hundreds of values, they cannot efficiently map to such large ranges. Meeting this capacity requirement forces us to either reduce range or lower precision.
 
 The iPhone timer exemplifies this trade-off: it divides time setting across three separate wheels for hours, minutes, and seconds. While each wheel handles only dozens of values, users must perform three separate adjustments, resulting in poor efficiency.
 
-However, Apple's approach also reveals a key insight: by treating hour/minute/second selection as an additional dimension, we can transform a one-dimensional variable with enormous range into a multi-dimensional system with manageable sub-ranges. This principle extends naturally to virtual knobs—we can leverage the unused parameters (center position c and radius r) to introduce new dimensions, dramatically expanding the system's representational capacity.
+However, Apple's approach also reveals a key insight: by treating hour/minute/second selection as an additional dimension, we can transform a one-dimensional variable with enormous range into a multi-dimensional system with manageable sub-ranges. This principle extends naturally to virtual knobs — we can leverage the unused parameters (center position c and radius r) to introduce new dimensions. I call it **dimension extension**, which dramatically expanding the system's representational capacity.
 
 ### Application Case 1: Enhanced Timer Design
 
@@ -134,7 +134,7 @@ Using knob radius to select hours, minutes, or seconds (radius < r₁ -> hours; 
 
 ### Application Case 2: Advanced Video Editing
 
-For video editing or surveillance browsing requiring various playback speeds, beyond discrete time unit mapping, continuous functions can be constructed:
+For video editing or surveillance browsing requiring various playback speeds, beyond discrete time unit mapping, continuous functions can be constructed (for simplicity, using a linear function as an example):
 
 ```
 unit_t = β × r
@@ -147,7 +147,7 @@ Where:
 
 ### Application Case 3: YAP Media Player
 
-In my video player **YAP**, both knob position and size select variables simultaneously. During playback, gestures on the left side use larger virtual knobs (wider finger spread) for volume control and smaller knobs for brightness. Similarly, right-side gestures use large/medium/small knobs corresponding to 1-second/30-second/10-minute seeking increments. This enables rapid, precise navigation to any video position.
+In my video player **YAP**, both knob position and size select variables simultaneously. During playback, gestures on the left side use larger virtual knobs (wider finger spread) for volume control and smaller knobs for brightness. Similarly, right-side gestures use large/medium/small knobs corresponding to 1-second/30-second/10-minute seeking increments. This enables rapid and precise navigation to any video position.
 
 **Demo Videos**:
 - [Bilibili Demo](https://www.bilibili.com/video/BV1iYeeztECf/?vd_source=58a10372417c06b5b1b6a5946b852c45)
@@ -159,35 +159,29 @@ In my video player **YAP**, both knob position and size select variables simulta
 
 ### VR/AR Environment Extensions
 
-Since virtual knobs depend only on fingertip positions, they're perfectly suited for VR/AR environments. Through computer vision or other methods to track fingertip positions in real-time, knob rotations can be calculated. With appropriate activation/deactivation mechanisms, seamless VR/AR operation becomes possible.
+Since virtual knobs depend only on fingertip positions, they're perfectly suited for VR/AR environments. Through omputer vision or other methods to track fingertip positions in real-time, knob rotations can be calculated. With appropriate activation/deactivation mechanisms, seamless VR/AR operation becomes possible.
 
 ---
 
 ## Looking Forward: The Future of Interaction
 
-I'm currently pursuing patent for this gesture technology. As a foundational human-machine interaction technique, virtual knobs have tremendous potential across multiple domains:
-
-- **Multi-platform compatibility**: Desktop, mobile, VR, AR environments
-- **Cross-domain applications**: Automotive systems, smart homes, industrial controls
-- **Technical value**: Enhanced interaction efficiency, reduced learning costs, improved user experience
-
-I believe virtual knobs will bring more efficient, intuitive, and engaging experiences to future human-machine interaction!
+Currently, I am applying for a patent for the knob gesture. I believe that knob gestures, as a fundamental human-machine interaction technology, will be widely applicable across desktop, mobile, VR, and future interaction environments, making human-machine interaction more effective and engaging!
 
 ---
 
 ## Reflection on Innovation
 
-This article presents the thought process in logical order, but actual innovation is full of leaps and serendipity. The innovation process is arduous and challenging, but the excitement when inspiration strikes and the fulfillment of completing a product give me the drive to keep innovating.
+This article presents the thought process in logical order, but actual innovation is full of leaps and serendipity! The innovation process is arduous and challenging, but the excitement when inspiration strikes and the fulfillment of completing a product give me the drive to keep innovating!
 
 ---
 
 p.s.
-Another video of Virtual Knob: 
-- [Searing for the lost gesture - YouTube](https://youtu.be/Ab15RVB1G_U)
-- [Searing for the lost gesture - Bilibili](https://www.bilibili.com/video/BV1MT3vzREax/?spm_id_from=333.1387.homepage.video_card.click)
+An introduction video of Virtual Knob: 
+- [Searching for the lost gesture - YouTube](https://youtu.be/Ab15RVB1G_U)
+
 ## Related Topics
 
-`Human-Computer Interaction` `UI/UX Design` `Mobile Development` `Automotive Systems` `Touch Interaction` `Unity Development` `Innovation` `Patents`
+`Human-Machine Interaction` `UI/UX Design` `Mobile Development` `Automotive Systems` `Touch Interaction` `Innovation` `Patents`
 
 ---
 

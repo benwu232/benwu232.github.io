@@ -114,19 +114,17 @@ I spent about two weeks completing the virtual knob prototype on an Android devi
 
 After completing the initial design, I explored additional possibilities. The prototype worked excellently but only used rotation angle for adjusting. According to the mathematical model, Virtual knobs still have two parameters c and r not used  — could these be utilized too?
 
-Through experimentation, I discovered operational precision limits:
+Through experimentation, I discovered operational precision limits for different gesture types under light attention conditions:
 
-| Operation Type | Experimental Range | Practical Precision | Controllable Values |
-|---------------|------------------|-------------------|-------------------|
-| Rotation | ~100° | 1° minimum interval | ~100 values |
-| Scaling | 400-500 pixels | Several pixels | Tens of values |
-| Translation | 400-800 pixels | Several pixels | Tens of values |
+- **Rotation**: Most precise with strongest interference resistance (bumps, vibrations). Limited by rotation angle per gesture and requiring interference buffer space, controllable values are under 100, typically 30-80.
+- **Scaling**: Least precise with interference resistance varying by usage. On small screens like phones, controllable values are under 10.
+- **Translation**: Moderately precise but poor interference resistance. In low-interference scenarios, controllable values are less than rotation gestures; in bumpy/vibrating environments, it becomes largely ineffective (many players offer swipe-to-seek functionality that fails in automotive environments).
 
-This approach works well for common applications but falls short in high-precision or wide-range scenarios. Consider timer settings: even when limited to a single day, we have 24×60×60=86,400 seconds. Since single operations can only handle tens to hundreds of values, they cannot efficiently map to such large ranges. Meeting this capacity requirement forces us to either reduce range or lower precision.
+Based on these experiments, rotation gestures perform best in high-interference scenarios (automotive environments) while other gestures should be avoided. In normal scenarios (desktop apps, handheld devices), rotation gestures are also more precise and efficient than existing adjustment methods (steppers, sliders).
 
-The iPhone timer exemplifies this trade-off: it divides time setting across three separate wheels for hours, minutes, and seconds. While each wheel handles only dozens of values, users must perform three separate adjustments, resulting in poor efficiency.
+However, all gestures fall short in high-precision or wide-range scenarios. Consider timer applications: even limiting to one day yields 24×60×60=86,400 seconds. Since individual gestures can precisely control only dozens of values, they cannot map to 86,400 values, forcing either range reduction or precision compromise. Apple's timer exemplifies this by splitting time setting across three separate wheels—each handling only dozens of values but requiring three separate adjustments, resulting in poor efficiency.
 
-However, Apple's approach also reveals a key insight: by treating hour/minute/second selection as an additional dimension, we can transform a one-dimensional variable with enormous range into a multi-dimensional system with manageable sub-ranges. This principle extends naturally to virtual knobs — we can leverage the unused parameters (center position c and radius r) to introduce new dimensions. I call it **dimension extension**, which dramatically expanding the system's representational capacity.
+Apple's timer also provides inspiration: treating hour/minute/second selection as an additional dimension transforms a one-dimensional variable with enormous range into a multi-dimensional system with manageable sub-ranges. This principle extends to virtual knobs by leveraging unused parameters (c, r) to introduce new dimensions—what I call **dimension extension**. Through dimension extension, virtual knobs' representational capacity increases dramatically.
 
 ### Application Case 1: Enhanced Timer Design
 

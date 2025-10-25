@@ -171,6 +171,7 @@ Since virtual knobs depend only on fingertip positions, they're perfectly suited
 ## Looking Forward: The Future of Interaction
 
 Currently, I am applying for a patent for the knob gesture. I believe that knob gestures, as a fundamental human-machine interaction technology, will be widely applicable across desktop, mobile, VR, and future interaction environments, making human-machine interaction more effective and engaging!
+[Patent](https://patents.google.com/patent/CN119597197A/en?oq=119597197)
 
 ---
 

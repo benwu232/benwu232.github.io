@@ -130,6 +130,13 @@ Apple's timer also provides inspiration: treating hour/minute/second selection a
 
 Using knob radius to select hours, minutes, or seconds (radius < r₁ -> hours; r₁ ≤ radius ≤ r₂ -> minutes; radius > r₂ -> seconds), with rotation angle adjusting specific values. The knob becomes three concentric rings, with finger scaling enabling easy switching between different rings. One rotation gesture sets time quickly and precisely.
 
+**Demo Videos**：
+- [Bilibili Demo](https://www.bilibili.com/video/BV1zF4MzzE29)
+- [YouTube Demo](https://youtu.be/R3fSJENbgAk)
+
+**Download & Try** (Free app):
+- [App Store](https://apps.apple.com/app/simtimerx/id6753038970)
+
 ### Application Case 2: Advanced Video Editing
 
 For video editing or surveillance browsing requiring various playback speeds, beyond discrete time unit mapping, continuous functions can be constructed (for simplicity, using a linear function as an example):
